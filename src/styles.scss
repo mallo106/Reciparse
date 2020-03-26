@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 600px; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+app-home {
+  & .mat-tab-body {
+    width: 400px;
+    overflow-y: auto;
+    max-height: 550px;
+  }
+
+  & .mat-tab-group {
+    width: 500px
+  }
+}
