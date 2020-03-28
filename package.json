@@ -23,6 +23,7 @@
     "@angular/router": "~9.0.6",
     "@types/chrome": "0.0.101",
     "rxjs": "~6.5.4",
+    "schema-dts": "^0.5.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

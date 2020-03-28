@@ -1,9 +1,27 @@
-<mat-tab-group mat-stretch-tabs>
+<mat-tab-group mat-stretch-tabs *ngIf="!!myLinkedDataRecipe">
   <mat-tab label="Ingredients">
-    <mat-list *ngFor="let anItem of myRecipe.ingredients">
-      <mat-list-item> {{anItem.text}} </mat-list-item>
+    <mat-list *ngIf="!!myLinkedDataRecipe.recipeIngredient">
+      <mat-list-item *ngFor="let anItem of myLinkedDataRecipe.recipeIngredient">
+        {{anItem}}
+      </mat-list-item>
     </mat-list>
   </mat-tab>
-  <mat-tab label="Directions"> Directions stuff </mat-tab>
-  <mat-tab label="Images"> Images stuff </mat-tab>
+  <mat-tab label="Directions">
+    <mat-list *ngIf="!!myLinkedDataRecipe.recipeInstructions">
+        <mat-list-item class="step-item"
+          *ngFor="let anInstruction of myLinkedDataRecipe.recipeInstructions;index as index; last as last">
+          <div matLine>Step {{index + 1}}:</div>
+          <div matLine class="wrap">{{!!anInstruction.text ? anInstruction.text : anInstruction}}</div>
+        </mat-list-item>
+    </mat-list>
+  </mat-tab>
+  <mat-tab label="Images">
+    <mat-list *ngIf="!!myLinkedDataRecipe.image">
+      <mat-list-item *ngFor="let anImage of getImages()">
+        <mat-card>
+          <img mat-card-image [src]="anImage">
+        </mat-card>
+      </mat-list-item>
+    </mat-list>
+  </mat-tab>
 </mat-tab-group>

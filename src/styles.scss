@@ -13,4 +13,14 @@ app-home {
   & .mat-tab-group {
     width: 500px
   }
+
+  & .mat-list-item {
+    height: auto !important;
+  }
+  & .mat-line.wrap {
+    white-space: normal !important;
+  }
+  & .step-item {
+   padding-bottom: 1rem!important;
+  }
 }
