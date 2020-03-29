@@ -1,27 +1,27 @@
 <mat-tab-group mat-stretch-tabs *ngIf="!!myLinkedDataRecipe">
   <mat-tab label="Ingredients">
     <mat-list *ngIf="!!myLinkedDataRecipe.recipeIngredient">
-      <mat-list-item *ngFor="let anItem of myLinkedDataRecipe.recipeIngredient">
+      <mat-list-item *ngFor="let anItem of myLinkedDataRecipe.recipeIngredient" class="p-1 h-auto">
         {{anItem}}
       </mat-list-item>
     </mat-list>
   </mat-tab>
   <mat-tab label="Directions">
     <mat-list *ngIf="!!myLinkedDataRecipe.recipeInstructions">
-        <mat-list-item class="step-item"
+        <mat-list-item class="p-1 h-auto"
           *ngFor="let anInstruction of myLinkedDataRecipe.recipeInstructions;index as index; last as last">
           <div matLine>Step {{index + 1}}:</div>
-          <div matLine class="wrap">{{!!anInstruction.text ? anInstruction.text : anInstruction}}</div>
+          <div matLine class="text-wrap">{{!!anInstruction.text ? anInstruction.text : anInstruction}}</div>
         </mat-list-item>
     </mat-list>
   </mat-tab>
-  <mat-tab label="Images">
-    <mat-list *ngIf="!!myLinkedDataRecipe.image">
-      <mat-list-item *ngFor="let anImage of getImages()">
-        <mat-card>
-          <img mat-card-image [src]="anImage">
-        </mat-card>
-      </mat-list-item>
-    </mat-list>
+  <mat-tab label="Images" height="550px">
+    <ngb-carousel [interval]="0" class="d-flex justify-content-center align-items-center">
+      <ng-template ngbSlide *ngFor="let img of getImages(); index as i">
+        <div class="d-flex justify-content-center align-items-center">
+          <img [src]="img">
+        </div>
+      </ng-template>
+    </ngb-carousel>
   </mat-tab>
 </mat-tab-group>
