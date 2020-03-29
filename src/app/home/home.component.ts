@@ -12,12 +12,8 @@ export class HomeComponent {
     try {
       // @ts-ignore
       chrome.tabs.executeScript(null,
-        {code: `var aText = document.querySelector("script[type='application/ld+json").innerText; aText`}, (theResults) =>  {
-          const aLinkedData: any[] = JSON.parse(theResults[0]);
-          if (!Boolean(theResults) || !Array.isArray(theResults) || theResults.length < 1) {
-            return;
-          }
-          this.parseLinkedData(theResults[0]);
+        {file: `js/microdata-to-json.js`}, (theResults) =>  {
+          this.myLinkedDataRecipe = theResults[0];
         });
     } catch (anE) {
       // This is here if you're running the app outside of the chrome extension popup window

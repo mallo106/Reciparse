@@ -19,10 +19,10 @@ Run `ng build`
   
 ##Functional websites examples
 
-https://www.allrecipes.com/recipe/231544/authentic-chicken-adobo/
-https://alexandracooks.com/2018/03/02/overnight-refrigerator-focaccia-best-focaccia/
+- https://www.allrecipes.com/recipe/231544/authentic-chicken-adobo/
+- https://alexandracooks.com/2018/03/02/overnight-refrigerator-focaccia-best-focaccia/
+- http://www.evseats.com/cauliflower-mash-with-meatballs-smothered-in-gravy/?fbclid=IwAR3jMr_loNBbOmLrOpFPYL8sxx6Bo_6ORqcaBPbUrCQzgIq5T0y9WPY_WxY
+- https://www.allrecipes.com/recipe/277700/instant-pot-filipino-chicken-adobo/
 
-##Broken site examples (embedded linked data)
-https://www.allrecipes.com/recipe/277700/instant-pot-filipino-chicken-adobo/
-http://www.evseats.com/cauliflower-mash-with-meatballs-smothered-in-gravy/?fbclid=IwAR3jMr_loNBbOmLrOpFPYL8sxx6Bo_6ORqcaBPbUrCQzgIq5T0y9WPY_WxY
-https://fitmomjourney.com/keto-bagel-dogs/?fbclid=IwAR3jMr_loNBbOmLrOpFPYL8sxx6Bo_6ORqcaBPbUrCQzgIq5T0y9WPY_WxY
+##Broken site examples
+- (Image broken) https://fitmomjourney.com/keto-bagel-dogs/?fbclid=IwAR3jMr_loNBbOmLrOpFPYL8sxx6Bo_6ORqcaBPbUrCQzgIq5T0y9WPY_WxY

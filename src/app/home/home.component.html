@@ -5,6 +5,11 @@
         {{anItem}}
       </mat-list-item>
     </mat-list>
+    <mat-list *ngIf="!!myLinkedDataRecipe.ingredients">
+      <mat-list-item *ngFor="let anItem of myLinkedDataRecipe.ingredients" class="p-1 h-auto">
+        {{anItem}}
+      </mat-list-item>
+    </mat-list>
   </mat-tab>
   <mat-tab label="Directions">
     <mat-list *ngIf="!!myLinkedDataRecipe.recipeInstructions">
