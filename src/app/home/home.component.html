@@ -20,13 +20,11 @@
         </mat-list-item>
     </mat-list>
   </mat-tab>
-  <mat-tab label="Images" height="550px">
-    <ngb-carousel [interval]="0" class="d-flex justify-content-center align-items-center">
-      <ng-template ngbSlide *ngFor="let img of getImages(); index as i">
-        <div class="d-flex justify-content-center align-items-center">
-          <img [src]="img">
-        </div>
-      </ng-template>
-    </ngb-carousel>
+  <mat-tab label="Images" height="550px" *ngIf="myImages.length > 0">
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="w-100 m-auto">
+        <img [src]="myImages[myImages.length - 1]" class="recipe-image">
+      </div>
+    </div>
   </mat-tab>
 </mat-tab-group>

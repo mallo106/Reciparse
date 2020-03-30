@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {exampleJson2} from '../parser/example-strings';
+import {exampleJson2} from './example-strings';
 import {ImageObject, Recipe, URL} from 'schema-dts';
 
 @Component({
@@ -7,18 +7,21 @@ import {ImageObject, Recipe, URL} from 'schema-dts';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  myLinkedDataRecipe: Recipe = {'@type': 'Recipe'} ;
+  myLinkedDataRecipe: Recipe = {'@type': 'Recipe'};
+  myImages: string[] = [];
   constructor() {
     try {
       // @ts-ignore
       chrome.tabs.executeScript(null,
         {file: `js/microdata-to-json.js`}, (theResults) =>  {
           this.myLinkedDataRecipe = theResults[0];
+          this.myImages = this.getImages();
         });
     } catch (anE) {
       // This is here if you're running the app outside of the chrome extension popup window
       // Seed the component with some example json for dev work
       this.parseLinkedData(exampleJson2);
+      this.myImages = this.getImages();
     }
   }
 
@@ -46,7 +49,7 @@ export class HomeComponent {
    * Return an array of urls from the images provided
    */
   getImages(): string[] {
-    if (!Boolean(this.myLinkedDataRecipe.image)) {
+    if (!Boolean(this.myLinkedDataRecipe) || !Boolean(this.myLinkedDataRecipe.image)) {
       return [];
     }
     if (Array.isArray(this.myLinkedDataRecipe.image)) {

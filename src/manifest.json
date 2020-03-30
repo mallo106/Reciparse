@@ -11,5 +11,9 @@
     "default_title": "Reciparse",
     "default_popup": "index.html"
   },
+  "icons": {
+    "18": "icons/baseline_fastfood_black_18dp.png",
+    "36": "icons/baseline_fastfood_black_18dp_2x.png"
+  },
   "manifest_version": 2
 }

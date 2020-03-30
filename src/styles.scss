@@ -1,23 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-html, body { height: 600px; }
+
+$window-height: 600px;
+$window-width: 500px;
+$tab-content-height: 550px;
+
+html, body { height: $window-height; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 app-home {
   & .mat-tab-body {
-    width: 400px;
     overflow-y: auto;
-    height: 550px;
+    height: $tab-content-height;
   }
 
   & .mat-tab-group {
-    width: 500px
+    width: $window-width
   }
 }
-ngb-carousel {
-  img {
-    height: 400px;
-  }
-  height: 550px;
-  background-color: black;
+
+.recipe-image {
+  display: block;
+  max-width: 100%;
+  max-height: $tab-content-height;
+  height: auto;
+  margin: auto;
 }
