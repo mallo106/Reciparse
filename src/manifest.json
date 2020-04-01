@@ -1,9 +1,8 @@
 {
-  "name": "Reciparse ",
-  "description": "Find the Recipe in the page",
+  "name": "Reciparse",
+  "description": "Pulls recipe ingredients and instructions from the current web page",
   "version": "1.0",
   "permissions": [
-    "activeTab",
     "http://*/*",
     "https://*/*"
   ],
@@ -13,7 +12,8 @@
   },
   "icons": {
     "18": "icons/baseline_fastfood_black_18dp.png",
-    "36": "icons/baseline_fastfood_black_18dp_2x.png"
+    "36": "icons/baseline_fastfood_black_18dp_2x.png",
+    "128": "icons/baseline_fastfood_black_18dp_128.png"
   },
   "manifest_version": 2
 }
