@@ -1,38 +1,67 @@
+
+(function main() {
+  let aRecipe = collectRecipe(document);
+  if (Boolean(aRecipe)) {
+    return aRecipe;
+  }
+  document.querySelectorAll('iframe').forEach( anIframe => {
+    if (Boolean(aRecipe)) {
+      return;
+    }
+    try {
+      aRecipe = collectRecipe(anIframe.contentWindow.document);
+    } catch (anE) {
+      // if the iframe is from a different origin an exception is thrown. keep looking
+    }
+  });
+  return aRecipe;
+})();
+
 /**
  * Attempts to collect the recipe object from the ld+json first, then the microdata in the page
  * @returns {(null|T)|{"@type": *}}
  */
-(function collectRecipe() {
-  let aRecipe = collectRecipeFromLD();
+function collectRecipe(theWindow) {
+  let aRecipe = collectRecipeFromLD(theWindow);
   if (Boolean(aRecipe)) {
     return aRecipe;
   }
-  aRecipe = document.querySelector(`*[itemType='https://schema.org/Recipe']`) || document.querySelector(`*[itemType='http://schema.org/Recipe']`);
-  return getMicrodataItem(aRecipe);
-})();
-
+  const aRecipeElement = theWindow.querySelector(`*[itemType='https://schema.org/Recipe']`) || theWindow.querySelector(`*[itemType='http://schema.org/Recipe']`);
+  if (!Boolean(aRecipeElement)) {
+    return null;
+  }
+  return getMicrodataItem(aRecipeElement);
+}
 /**
  * Collects the recipe from the ld+json element if it exists
  * @returns {null|*}
  */
-function collectRecipeFromLD() {
-  const aLinkedDataElement = document.querySelector("script[type='application/ld+json");
-  let aLinkedData = Boolean(aLinkedDataElement) && aLinkedDataElement.innerText;
-  if (!Boolean(aLinkedData)) {
-    return null;
-  }
-  aLinkedData = JSON.parse(aLinkedData);
-  let aLinkedDataList = [];
-  if (Array.isArray(aLinkedData)) {
-    aLinkedDataList = aLinkedData;
-  } else if (Boolean(aLinkedData['@graph']) && Array.isArray(aLinkedData['@graph'])) {
-    aLinkedDataList = aLinkedData['@graph'];
-  }
-  return aLinkedDataList.find(aLD =>
-    Boolean(aLD['@context'])
-    && aLD['@context'].indexOf('://schema.org') > 0
-    && aLD['@type'] === 'Recipe'
-  );
+function collectRecipeFromLD(theWindow) {
+  const aLinkedDataElements = theWindow.querySelectorAll("script[type='application/ld+json']");
+  let aRecipe = undefined;
+  aLinkedDataElements.forEach(aLinkedDataElement => {
+    let aLinkedData = Boolean(aLinkedDataElement) && aLinkedDataElement.innerText;
+    if (!Boolean(aLinkedData)) {
+      return null;
+    }
+    aLinkedData = JSON.parse(aLinkedData);
+    if (!Array.isArray(aLinkedData) && aLinkedData['@type'] === "Recipe") {
+      aRecipe = aLinkedData;
+      return;
+    }
+    let aLinkedDataList = [];
+    if (Array.isArray(aLinkedData)) {
+      aLinkedDataList = aLinkedData;
+    } else if (Boolean(aLinkedData['@graph']) && Array.isArray(aLinkedData['@graph'])) {
+      aLinkedDataList = aLinkedData['@graph'];
+    }
+    aRecipe = aLinkedDataList.find(aLD =>
+      Boolean(aLD['@context'])
+      && aLD['@context'].indexOf('://schema.org') > 0
+      && aLD['@type'] === 'Recipe'
+    );
+  });
+  return aRecipe;
 }
 
 /**
