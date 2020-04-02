@@ -14,6 +14,9 @@ export class HomeComponent {
       // @ts-ignore
       chrome.tabs.executeScript(null,
         {file: `js/microdata-to-json.js`}, (theResults) =>  {
+          if (!Boolean(theResults[0])) {
+            return;
+          }
           this.myLinkedDataRecipe = theResults[0];
           this.myImages = this.getImages();
         });
