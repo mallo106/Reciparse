@@ -27,7 +27,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.json",
-              "src/js/microdata-to-json.js",
+              "src/js/",
               "src/icons/"
             ],
             "styles": [
