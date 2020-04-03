@@ -1,15 +1,27 @@
 chrome.tabs.onActivated.addListener(anActiveInfo => {
-  chrome.tabs.get(anActiveInfo.tabId,(aCurrent) => {
+  updateIcon(anActiveInfo.tabId)
+});
+
+chrome.tabs.onUpdated.addListener((aTabId, anInfo) => {
+    updateIcon(aTabId);
+});
+
+/**
+ * update the extension icon based on if there's a recipe on the page or not
+ * @param theTabId
+ */
+function updateIcon(theTabId) {
+  chrome.tabs.get(theTabId,(aCurrent) => {
     if (!Boolean(aCurrent.url) || !aCurrent.url.startsWith('http')) {
       setIcon(false);
       return;
     }
-    chrome.tabs.executeScript(anActiveInfo.tabId,
+    chrome.tabs.executeScript(theTabId,
       {file: `js/microdata-to-json.js`}, (aResults) =>  {
         setIcon(Boolean(aResults) && Boolean(aResults[0]))
       });
   });
-});
+}
 
 function setIcon(theHasSuffix) {
   const aSuffix = !theHasSuffix ? '' : '_alert';

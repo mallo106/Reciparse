@@ -1,7 +1,7 @@
 {
   "name": "Reciparse",
   "description": "Pulls recipe ingredients and instructions from the current web page",
-  "version": "1.0.0.2",
+  "version": "1.0.0.3",
   "permissions": [
     "http://*/*",
     "https://*/*"
