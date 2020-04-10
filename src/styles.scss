@@ -1,28 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 
-$window-height: 600px;
 $window-width: 500px;
-$tab-content-height: 550px;
 
-html, body { height: $window-height; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-app-home {
-  & .mat-tab-body {
-    overflow-y: auto;
-    height: $tab-content-height;
-  }
-
-  & .mat-tab-group {
-    width: $window-width
-  }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.home {
+  width: $window-width;
 }
 
 .recipe-image {
-  display: block;
-  max-width: 100%;
-  max-height: $tab-content-height;
-  height: auto;
-  margin: auto;
+  max-height: 400px;
+  max-width: 400px;
+}
+
+.recipe-tabs {
+  margin-bottom: 50px;
+  & mat-tab-header {
+    position: fixed;
+    width:100%;
+    bottom: 0;
+    z-index: 5;
+    background-color: white;
+  }
 }
