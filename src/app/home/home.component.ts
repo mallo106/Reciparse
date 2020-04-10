@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {exampleJson2} from './example-strings';
+import {exampleJson} from './example-strings';
 import {ImageObject, Recipe, URL} from 'schema-dts';
 
 @Component({
@@ -9,6 +9,7 @@ import {ImageObject, Recipe, URL} from 'schema-dts';
 export class HomeComponent {
   myLinkedDataRecipe: Recipe = {'@type': 'Recipe'};
   myImages: string[] = [];
+  myAuthor: string;
   constructor() {
     try {
       // @ts-ignore
@@ -18,33 +19,21 @@ export class HomeComponent {
             return;
           }
           this.myLinkedDataRecipe = theResults[0];
-          this.myImages = this.getImages();
+          this.setupValues();
         });
     } catch (anE) {
-      // This is here if you're running the app outside of the chrome extension popup window
+      // This is here if you're running the app outside of the chrome extension popup window.
       // Seed the component with some example json for dev work
-      this.parseLinkedData(exampleJson2);
-      this.myImages = this.getImages();
+      this.myLinkedDataRecipe = exampleJson;
+      this.setupValues();
     }
   }
 
-  /**
-   * Linked data in web pages can be provided in a few different structures.
-   * Ensure we get the recipe schema from the linked data
-   */
-  private parseLinkedData(theLinkedData: string) {
-    const aLinkedData: any = JSON.parse(theLinkedData);
-    let aLinkedDataList: any[] = [];
-    if (Array.isArray(aLinkedData)) {
-      aLinkedDataList = aLinkedData;
-    } else if (Boolean(aLinkedData['@graph']) && Array.isArray(aLinkedData['@graph'])) {
-      aLinkedDataList = aLinkedData['@graph'];
+  private setupValues() {
+    this.myImages = this.getImages();
+    if (Boolean(this.myLinkedDataRecipe.author) && this.myLinkedDataRecipe.author['@type'] === 'Person') {
+      this.myAuthor = (this.myLinkedDataRecipe.author as any).name;
     }
-    this.myLinkedDataRecipe = aLinkedDataList.find(aLD =>
-      Boolean(aLD['@context'])
-      && aLD['@context'].indexOf('://schema.org') > 0
-      && aLD['@type'] === 'Recipe'
-    );
   }
 
   /**
@@ -72,5 +61,14 @@ export class HomeComponent {
         console.log('Failed to match on type ', theImage['@type'], theImage);
         return theImage.toString();
     }
+  }
+
+  /**
+   * Formats the instruction object to a string
+   */
+  getInstructionText(anInstruction: any): string {
+    return (Boolean(anInstruction.text) ? anInstruction.text : anInstruction)
+      .split('&gt;').join('>')
+      .split('&lt;').join('<');
   }
 }
