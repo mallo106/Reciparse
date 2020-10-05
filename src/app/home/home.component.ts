@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {exampleJson} from './example-strings';
 import {ImageObject, Recipe, URL} from 'schema-dts';
 
@@ -10,7 +10,7 @@ export class HomeComponent {
   myLinkedDataRecipe: Recipe = {'@type': 'Recipe'};
   myImages: string[] = [];
   myAuthor: string;
-  constructor() {
+  constructor(myChangeDetector: ChangeDetectorRef) {
     try {
       // @ts-ignore
       chrome.tabs.executeScript(null,
@@ -20,6 +20,7 @@ export class HomeComponent {
           }
           this.myLinkedDataRecipe = theResults[0];
           this.setupValues();
+          myChangeDetector.detectChanges();
         });
     } catch (anE) {
       // This is here if you're running the app outside of the chrome extension popup window.

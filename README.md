@@ -15,7 +15,7 @@ Run `ng build`
 - Chrome/Opera:
   1. Type `chrome://extensions` in your address bar to bring up the extensions page.
   2. Enable developer mode (checkbox)
-  3. Click the "Load unpacked extension" button, navigate to the `build` folder of your local extension instance, and click "Ok".
+  3. Click the "Load unpacked extension" button, navigate to the `Reciparse/dist/Reciparse/` folder of your local extension instance, and click "Ok".
   
 ##Functional websites examples
 

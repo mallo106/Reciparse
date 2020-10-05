@@ -1,39 +1,44 @@
-<div class="home" *ngIf="!!myLinkedDataRecipe">
+<div class="home pt-1" *ngIf="!!myLinkedDataRecipe">
   <div  class="d-flex flex-column fill-window">
-    <div class="sticky-top bg-white">
-      <div class="d-flex p-1 justify-content-center align-items-center flex-column">
-        <div class="h4 mb-0 text-wrap text-center">{{myLinkedDataRecipe.name}}</div>
-        <div class="h7 text-left" *ngIf="!!myAuthor">Author: {{myAuthor}}</div>
-      </div>
-      <mat-divider></mat-divider>
+    <div *ngIf="!myLinkedDataRecipe.recipeIngredient" class="text-center p2">
+      Failed to find a recipe on the page.
     </div>
-    <mat-tab-group mat-stretch-tabs class="recipe-tabs" headerPosition="below">
-      <mat-tab label="Ingredients">
-        <mat-list *ngIf="!!myLinkedDataRecipe.recipeIngredient">
-          <mat-list-item *ngFor="let anItem of myLinkedDataRecipe.recipeIngredient" class="p-1 h-auto">
-            {{anItem}}
-          </mat-list-item>
-        </mat-list>
-        <mat-list *ngIf="!!myLinkedDataRecipe.ingredients">
-          <mat-list-item *ngFor="let anItem of myLinkedDataRecipe.ingredients" class="p-1 h-auto">
-            {{anItem}}
-          </mat-list-item>
-        </mat-list>
-      </mat-tab>
-      <mat-tab label="Directions">
-        <mat-list *ngIf="!!myLinkedDataRecipe.recipeInstructions">
-          <mat-list-item class="p-2 h-auto"
-                         *ngFor="let anInstruction of myLinkedDataRecipe.recipeInstructions;index as index; last as last">
-            <div matLine>Step {{index + 1}}:</div>
-            <div matLine class="text-wrap" [innerHTML]="getInstructionText(anInstruction)"></div>
-          </mat-list-item>
-        </mat-list>
-      </mat-tab>
-      <mat-tab label="Image" height="550px" *ngIf="myImages.length > 0">
-        <div class="d-flex justify-content-center align-items-center">
-          <img [src]="myImages[myImages.length - 1]" class="recipe-image">
+    <div *ngIf="!!myLinkedDataRecipe.recipeIngredient">
+      <div class="sticky-top bg-white">
+        <div class="d-flex p-1 justify-content-center align-items-center flex-column">
+          <div class="h4 mb-0 text-wrap text-center">{{myLinkedDataRecipe.name}}</div>
+          <div class="h7 text-left" *ngIf="!!myAuthor">Author: {{myAuthor}}</div>
         </div>
-      </mat-tab>
-    </mat-tab-group>
+        <mat-divider></mat-divider>
+      </div>
+      <mat-tab-group mat-stretch-tabs class="recipe-tabs" headerPosition="below">
+        <mat-tab label="Ingredients">
+          <mat-list *ngIf="!!myLinkedDataRecipe.recipeIngredient">
+            <mat-list-item *ngFor="let anItem of myLinkedDataRecipe.recipeIngredient" class="p-1 h-auto">
+              {{anItem}}
+            </mat-list-item>
+          </mat-list>
+          <mat-list *ngIf="!!myLinkedDataRecipe.ingredients">
+            <mat-list-item *ngFor="let anItem of myLinkedDataRecipe.ingredients" class="p-1 h-auto">
+              {{anItem}}
+            </mat-list-item>
+          </mat-list>
+        </mat-tab>
+        <mat-tab label="Directions">
+          <mat-list *ngIf="!!myLinkedDataRecipe.recipeInstructions">
+            <mat-list-item class="p-2 h-auto"
+                           *ngFor="let anInstruction of myLinkedDataRecipe.recipeInstructions;index as index; last as last">
+              <div matLine>Step {{index + 1}}:</div>
+              <div matLine class="text-wrap" [innerHTML]="getInstructionText(anInstruction)"></div>
+            </mat-list-item>
+          </mat-list>
+        </mat-tab>
+        <mat-tab label="Image" height="550px" *ngIf="myImages.length > 0">
+          <div class="d-flex justify-content-center align-items-center">
+            <img [src]="myImages[myImages.length - 1]" class="recipe-image">
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </div>
