@@ -17,7 +17,7 @@ Run `ng build`
   2. Enable developer mode (checkbox)
   3. Click the "Load unpacked extension" button, navigate to the `Reciparse/dist/Reciparse/` folder of your local extension instance, and click "Ok".
   
-##Functional websites examples
+## Functional websites examples
 
 - https://www.allrecipes.com/recipe/231544/authentic-chicken-adobo/
 - https://alexandracooks.com/2018/03/02/overnight-refrigerator-focaccia-best-focaccia/
